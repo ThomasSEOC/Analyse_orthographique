@@ -17,4 +17,4 @@ noeud recherche (noeud liste, char c);
 noeud nouveau_fils (noeud pere, char c);
 int compare (char* ch, noeud arbre);
 
-int arbre_infixe (void);
+int recherche_arbre (void);
