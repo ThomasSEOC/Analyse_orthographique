@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "arbre2.h"
+#include "arbre.h"
 #include <string.h>
 
 //noeud est déjà un pointeur
@@ -94,7 +94,7 @@ noeud nouveau_fils (noeud pere, char c){
 }
 
 //vérifie si ch est dans l'arbre:
-int compare (char* ch, noeud arbre){
+bool compare (char* ch, noeud arbre){
 
   int n = strlen (ch);
   noeud a2 = arbre;
@@ -102,8 +102,8 @@ int compare (char* ch, noeud arbre){
 
   while (i < n){
     if ( est_present (ch[i], a2) == 0){ //si non présent
-      printf ("Ce mot n'est pas dans le dictionnaire\n");
-      return 0;
+      //printf ("Ce mot n'est pas dans le dictionnaire\n");
+      return false;
     }
 
     //a2 devient le frère qui contient la lettre en question:
@@ -115,12 +115,12 @@ int compare (char* ch, noeud arbre){
   }
 
   if ((a2 -> fin_de_mot) == 1){
-    printf ("Ce mot est dans le dictionnaire\n");
-    return 0;
+    //printf ("Ce mot est dans le dictionnaire ");
+    return true;
   }
 
-  printf ("Ce mot n'est pas dans le dictionnaire, il manque des lettres\n");
-  return 0;
+  //printf ("Ce mot n'est pas dans le dictionnaire, il manque des lettres\n");
+  return false;
 }
 
 //Libération de l'arbre:
@@ -128,7 +128,7 @@ int compare (char* ch, noeud arbre){
 
 
 /*Lecture et construction de l'arbre*/
-int recherche_arbre (void){
+bool recherche_arbre (char *word){
   //Ouverture fichier:
   FILE *fp = fopen ("FR.txt","r");
   noeud new;
@@ -173,15 +173,15 @@ int recherche_arbre (void){
   }
   arbreb = arbre;
 
-  //Maintenant, on teste:
-  while (1){
-    //Le mot à rentrer:
-    printf (" Le mot?\n");
-    scanf ("%s", ch);
+  // //Maintenant, on teste:
+  // while (1){
+  //   //Le mot à rentrer:
+  //   printf (" Le mot?\n");
+  //   scanf ("%s", ch);
+  //
+  //   //Comparaison avec le dictionnaire:
+  //   compare (ch, arbre);
+  // }
 
-    //Comparaison avec le dictionnaire:
-    compare (ch, arbre);
-  }
-
-  return 0;
+  return compare(word,arbre);
 }
