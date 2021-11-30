@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "arbre.h"
+#include "arbre2.h"
 #include <string.h>
 
 //noeud est déjà un pointeur
@@ -94,7 +94,7 @@ noeud nouveau_fils (noeud pere, char c){
 }
 
 //vérifie si ch est dans l'arbre:
-bool compare (char* ch, noeud arbre){
+int compare (char* ch, noeud arbre){ // si nn et 1 si oui
 
   int n = strlen (ch);
   noeud a2 = arbre;
@@ -102,8 +102,8 @@ bool compare (char* ch, noeud arbre){
 
   while (i < n){
     if ( est_present (ch[i], a2) == 0){ //si non présent
-      //printf ("Ce mot n'est pas dans le dictionnaire\n");
-      return false;
+      printf ("Ce mot n'est pas dans le dictionnaire\n");
+      return 0;
     }
 
     //a2 devient le frère qui contient la lettre en question:
@@ -115,22 +115,61 @@ bool compare (char* ch, noeud arbre){
   }
 
   if ((a2 -> fin_de_mot) == 1){
-    //printf ("Ce mot est dans le dictionnaire ");
-    return true;
+    printf ("Ce mot est dans le dictionnaire\n");
+    return 0;
   }
 
-  //printf ("Ce mot n'est pas dans le dictionnaire, il manque des lettres\n");
-  return false;
+  printf ("Ce mot n'est pas dans le dictionnaire, il manque des lettres\n");
+  return 0;
 }
 
-//Libération de l'arbre:
+//Libération de la liste:
+// Cette fonction ne fonctionne pas
 
+void lib_arbre (noeud arbre_originel, noeud arbre, noeud sauv, char c){
+  if (arbre -> freres != NULL){ // on va dans le frere
+    lib_arbre(arbre_originel, arbre -> freres, arbre, 'f');
+  }
+  if (arbre -> fils != NULL){ // on va dans le fils
+    lib_arbre (arbre_originel,arbre -> fils, arbre, 'p');
+  }
+  if (arbre -> fils == NULL && arbre -> freres == NULL){
+    printf ("ON TRAITE LE CARACTERE %c\n", arbre -> lettre);
+    switch(c){
+      case 'f':
+      sauv -> freres = NULL;
+      printf ("le frr en question: %c\n", sauv -> lettre);
+      printf ("lib frr -> %c\n", arbre -> lettre);
 
+      free (arbre);
+      lib_arbre (arbre_originel, arbre_originel, arbre_originel, 'o');
+      break;
+      case 'p':
+      sauv -> fils = NULL;
+      printf ("le pere en question: %c\n", sauv -> lettre);
+      printf ("lib fils -> %c\n", arbre -> lettre);
+
+      free (arbre);
+      lib_arbre (arbre_originel, arbre_originel, arbre_originel, 'o');
+      break;
+      case 'o':
+      printf ("ben la normalement c'est fini\n");
+      //free (arbre_originel);
+      return;
+      break;
+      default:
+      printf ("ERROR FREE\n");
+      break;
+    }
+  }
+  return;
+
+}
 
 /*Lecture et construction de l'arbre*/
-bool recherche_arbre (char *word){
+noeud creation_arbre (void){
   //Ouverture fichier:
-  FILE *fp = fopen ("FR.txt","r");
+  FILE *fp = fopen ("fr2.txt","r");
   noeud new;
   noeud arbre = NULL;
   noeud arbreb;
@@ -171,17 +210,7 @@ bool recherche_arbre (char *word){
       i = 0;
       //On revient dans le père de tous et on recommence
   }
-  arbreb = arbre;
 
-  // //Maintenant, on teste:
-  // while (1){
-  //   //Le mot à rentrer:
-  //   printf (" Le mot?\n");
-  //   scanf ("%s", ch);
-  //
-  //   //Comparaison avec le dictionnaire:
-  //   compare (ch, arbre);
-  // }
 
-  return compare(word,arbre);
+  return arbre;
 }

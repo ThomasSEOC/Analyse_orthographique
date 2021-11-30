@@ -15,6 +15,7 @@ noeud nouveau_noeud (char c);
 noeud nouveau_frere (noeud pere, char c);
 noeud recherche (noeud liste, char c);
 noeud nouveau_fils (noeud pere, char c);
-bool compare (char* ch, noeud arbre);
+int compare (char* ch, noeud arbre);
+void lib_arbre(noeud arbre, noeud arbre1, noeud arbre2, char c);
 
-bool recherche_arbre (char *ch);
+arbre creation_arbre (void);
