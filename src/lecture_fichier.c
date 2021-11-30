@@ -58,7 +58,10 @@ void test_lecture(){
 
 
   char file_contents[30];
+  int mot_absent=0;
   // On récupère dans file contents les chaines de caractères sépaérées par un espace les unes après les autres
+
+
   while (fscanf(p, "%[^\n ] ", file_contents) != EOF) {
     //printf(">%s\n",file_contents);
 
@@ -74,21 +77,18 @@ void test_lecture(){
     // une fois les séparateurs enlevés, nous traitons "mot-à-mot" les chaines de caractère en les séparants sur les espacees
     char *pch;
     pch = strtok(file_contents," ");
-
     while(pch != NULL){
       // On a donc accès dans cette boucle aux mots un à un
       // Exemple : pour file_contents = "peut etre", on aura accès dans le while à "peut", puis à "etre" à l'itération suivante
-      printf(">%s ",pch);
-      if(recherche_arbre(pch)){
-        //printf("existe.\n");
-      }
-      else{
-        //printf("n'existe pas\n");
+      printf("<%s>\n",pch);
+      if(!recherche_arbre(pch)){
+        printf("%s n'existe pas.\n",pch);
+        mot_absent++;
       }
       pch = strtok(NULL," ");
     }
   }
-  printf("\nterminado\n");
+  printf("\nNombre de mot n'existant pas : %d\n", mot_absent);
   fclose(p);
 }
 
