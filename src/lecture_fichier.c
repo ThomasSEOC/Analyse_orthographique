@@ -48,7 +48,7 @@ void lecture_livre(){
 void test_lecture(){
   //Ouverture du fichier en mode "lecture seule"
   //const char* filename = "a_la_recherche_du_temps_perdu.txt" ;
-  const char* filename = "text_test.txt" ;
+  const char* filename = "a_la_recherche_du_temps_perdu.txt" ;
 
   FILE *p = fopen(filename, "r");
   if (p==NULL) {
@@ -60,7 +60,8 @@ void test_lecture(){
   char file_contents[30];
   int mot_absent=0;
   // On récupère dans file contents les chaines de caractères sépaérées par un espace les unes après les autres
-
+  // On fait l'arbre:
+  noeud arbre = creation_arbre();
 
   while (fscanf(p, "%[^\n ] ", file_contents) != EOF) {
     //printf(">%s\n",file_contents);
@@ -80,9 +81,9 @@ void test_lecture(){
     while(pch != NULL){
       // On a donc accès dans cette boucle aux mots un à un
       // Exemple : pour file_contents = "peut etre", on aura accès dans le while à "peut", puis à "etre" à l'itération suivante
-      printf("<%s>\n",pch);
-      if(!recherche_arbre(pch)){
-        printf("%s n'existe pas.\n",pch);
+      //printf("<%s>\n",pch);
+      if(!compare(pch, arbre)){
+        printf("%s\n",pch);
         mot_absent++;
       }
       pch = strtok(NULL," ");

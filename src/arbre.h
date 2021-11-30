@@ -18,4 +18,4 @@ noeud nouveau_fils (noeud pere, char c);
 int compare (char* ch, noeud arbre);
 void lib_arbre(noeud arbre, noeud arbre1, noeud arbre2, char c);
 
-arbre creation_arbre (void);
+noeud creation_arbre (void);

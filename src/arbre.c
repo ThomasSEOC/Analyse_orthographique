@@ -102,7 +102,7 @@ int compare (char* ch, noeud arbre){ // si nn et 1 si oui
 
   while (i < n){
     if ( est_present (ch[i], a2) == 0){ //si non présent
-      printf ("Ce mot n'est pas dans le dictionnaire\n");
+      //printf ("Ce mot n'est pas dans le dictionnaire\n");
       return 0;
     }
 
@@ -115,8 +115,8 @@ int compare (char* ch, noeud arbre){ // si nn et 1 si oui
   }
 
   if ((a2 -> fin_de_mot) == 1){
-    printf ("Ce mot est dans le dictionnaire\n");
-    return 0;
+    //printf ("Ce mot est dans le dictionnaire\n");
+    return 1;
   }
 
   printf ("Ce mot n'est pas dans le dictionnaire, il manque des lettres\n");
@@ -169,7 +169,7 @@ void lib_arbre (noeud arbre_originel, noeud arbre, noeud sauv, char c){
 /*Lecture et construction de l'arbre*/
 noeud creation_arbre (void){
   //Ouverture fichier:
-  FILE *fp = fopen ("fr2.txt","r");
+  FILE *fp = fopen ("FR.txt","r");
   noeud new;
   noeud arbre = NULL;
   noeud arbreb;
@@ -211,6 +211,6 @@ noeud creation_arbre (void){
       //On revient dans le père de tous et on recommence
   }
 
-
+  printf ("arbre créé");
   return arbre;
 }
