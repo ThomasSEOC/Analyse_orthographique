@@ -4,51 +4,15 @@
 #include <ctype.h>
 #include <sys/stat.h>
 #include "arbre.h"
+#include "list.h"
 
-void lecture_livre(){
-  char *filename  = "a_la_recherche_du_temps_perdu.txt" ;
-  FILE* p = fopen(filename,"r");
-  if(p==NULL){
-    printf("Erreur de lecture");
-    exit(EXIT_FAILURE);
-  }
 
-  char l1[5000], l2[5000];
-  fgets(l1,5000,p);
-  fgets(l2,5000,p);
 
-  char *ligne;
-  char *pch;
-  pch = strtok(l2," ");
-  while(pch != NULL){
-    printf("%s\n",pch);
-    pch = strtok(NULL," ");
-  }
-  printf("Ligne : %s",ligne);
 
-}
-
-// void traite_char(char* c){
-//   for(int i=0 ; i<strlen(c) ; i++){
-//     c[i]=tolower(c[i]);
-//     if(c[i]< 97 || c[i]>122){
-//       c[i] = ' ';
-//     }
-//   }
-//   char *pch;
-//   pch = strtok(c," ");
-//
-//   while(pch != NULL){
-//     printf("<%s>\n",pch);
-//     pch = strtok(NULL," ");
-//   }
-//
-// }
-
-void test_lecture(){
+void analyse_livre(){
   //Ouverture du fichier en mode "lecture seule"
-  //const char* filename = "a_la_recherche_du_temps_perdu.txt" ;
   const char* filename = "a_la_recherche_du_temps_perdu.txt" ;
+  //const char* filename = "text_test.txt" ;
 
   FILE *p = fopen(filename, "r");
   if (p==NULL) {
@@ -58,11 +22,15 @@ void test_lecture(){
 
 
   char file_contents[30];
-  int mot_absent=0;
-  // On récupère dans file contents les chaines de caractères sépaérées par un espace les unes après les autres
+
+  liste mots_absents = malloc(sizeof(*mots_absents));
+  mots_absents->value = "FIN DE LA LISTE";
+  int cpt=0;
+
   // On fait l'arbre:
   noeud arbre = creation_arbre();
 
+  // On récupère dans file_contents les chaines de caractères sépaérées par un espace les unes après les autres
   while (fscanf(p, "%[^\n ] ", file_contents) != EOF) {
     //printf(">%s\n",file_contents);
 
@@ -77,19 +45,20 @@ void test_lecture(){
 
     // une fois les séparateurs enlevés, nous traitons "mot-à-mot" les chaines de caractère en les séparants sur les espacees
     char *pch;
-    pch = strtok(file_contents," ");
+    pch = strtok(file_contents," \0");
     while(pch != NULL){
       // On a donc accès dans cette boucle aux mots un à un
       // Exemple : pour file_contents = "peut etre", on aura accès dans le while à "peut", puis à "etre" à l'itération suivante
       //printf("<%s>\n",pch);
       if(!compare(pch, arbre)){
-        printf("%s\n",pch);
-        mot_absent++;
+        printf(">%s\n",pch);
+        cpt++;
       }
       pch = strtok(NULL," ");
     }
   }
-  printf("\nNombre de mot n'existant pas : %d\n", mot_absent);
+  affiche(mots_absents);
+  printf("\nNombre de mot n'existant pas : %d\n", cpt);
   fclose(p);
 }
 
@@ -100,11 +69,7 @@ void test_lecture(){
 
 
 int main(){
-  // char b[14] = "%Hello;world#";
-  // printf("%s\n",b);
-  // traite_char(b);
-  // printf("%s\n",b);
-  test_lecture();
+  analyse_livre();
   return EXIT_SUCCESS ;
 
 }
