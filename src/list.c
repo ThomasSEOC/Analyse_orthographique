@@ -53,19 +53,19 @@ bool presence(char* valeur, liste l){
 
 
 
-// int main(){
-//   liste l = malloc(sizeof(*l));
-//   l->value = "loic";
-//   insere_tete("hello",&l);
-//   insere_tete("mme",&l);
-//   insere_tete("thomas",&l);
-//   insere_tete("ich",&l);
-//   insere_tete("ekip",&l);
-//
-//   affiche(l);
-//   printf("Taille de la liste :%d\n",taille(l));
-//
-//   presence("ekip",l);
-//   presence("salut",l);
-//   return EXIT_SUCCESS ;
-// }
+int main(){
+  liste l = malloc(sizeof(*l));
+  l->value = "loic";
+  insere_tete("hello",&l);
+  insere_tete("mme",&l);
+  insere_tete("thomas",&l);
+  insere_tete("ich",&l);
+  insere_tete("ekip",&l);
+
+  affiche(l);
+  printf("Taille de la liste :%d\n",taille(l));
+
+  presence("ekip",l);
+  presence("salut",l);
+  return EXIT_SUCCESS ;
+}

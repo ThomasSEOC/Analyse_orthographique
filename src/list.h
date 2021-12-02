@@ -1,5 +1,5 @@
-#ifndef _EX_1
-#define _EX_1
+#ifndef LIST
+#define LIST
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -14,11 +14,8 @@ typedef struct cellule* liste;
 
 
 void affiche (liste l);
-
 void insere_tete(char* nouveau, liste* pl);
-
 void insere_queue(char* nouveau, liste* pl);
-
 bool presence(char* valeur, liste l);
 
 

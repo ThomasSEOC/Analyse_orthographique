@@ -2,54 +2,54 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "arbre2.h"
+#include "arbre.h"
 #include <string.h>
 
 //noeud est déjà un pointeur
 
-//retourne 1 si c est présent et 0 si nn:
 int est_present (int c,noeud liste){
 
-  while (liste != NULL){
-    if ((liste -> lettre) == c){
-      //on retourne le noeud ou il y a c
-      return 1;
+  while (liste != NULL)
+  {
+    if ((liste -> lettre) == c)
+    {
+      return 1; //on retourne le noeud ou il y a c
     }
     liste = liste -> freres;
   }
-
-  //Si c n'y est pas:
-  return 0;
+  return 0; //Si c n'y est pas:
 }
 
-// créer un nouveau noeud:
 noeud nouveau_noeud (char c){
   noeud newknot = calloc (1, sizeof (*newknot));
   newknot -> lettre = c;
   return newknot;
 }
 
-//Ajoute un nouveau frère s'il n'y est pas déjà:
 noeud nouveau_frere (noeud pere, char c){
 
   noeud p = pere;
 
-  if (p == NULL){
+  if (p == NULL)
+  {
     //noeud vide:
     noeud new = calloc (1, sizeof (*new));
     new -> lettre = c;
     return (new);
   }
 
-  while (p -> freres != NULL){
+  while (p -> freres != NULL)
+  {
     //si p a des frères:
-    if (p -> lettre == c){
+    if (p -> lettre == c)
+    {
       return pere;
     }
     p = p -> freres;
   }
 
-  if (p -> lettre == c){
+  if (p -> lettre == c)
+  {
     //s'il n'en a pas:
     return pere;
   }
@@ -62,13 +62,15 @@ noeud nouveau_frere (noeud pere, char c){
 
 }
 
-//renvoie le noeud de la liste qui contient c:
+
 noeud recherche (noeud liste, char c){
 
   noeud l = liste;
 
-  while (l != NULL){
-    if (l -> lettre == c){
+  while (l != NULL)
+  {
+    if (l -> lettre == c)
+    {
       return l;
     }
     l = l -> freres;
@@ -79,9 +81,10 @@ noeud recherche (noeud liste, char c){
   return liste;
 }
 
-//ajoute un nouveau fils:
 noeud nouveau_fils (noeud pere, char c){
-  if (est_present(c, pere -> fils)){//si le fils y est déjà:
+  if (est_present(c, pere -> fils))
+  {
+     //si le fils y est déjà:
     return pere;
   }
 
@@ -93,7 +96,6 @@ noeud nouveau_fils (noeud pere, char c){
   return pere;
 }
 
-//vérifie si ch est dans l'arbre:
 int compare (char* ch, noeud arbre){ // si nn et 1 si oui
 
   int n = strlen (ch);
@@ -123,9 +125,7 @@ int compare (char* ch, noeud arbre){ // si nn et 1 si oui
   return 0;
 }
 
-//Libération de la liste:
 // Cette fonction ne fonctionne pas
-
 void lib_arbre (noeud arbre_originel, noeud arbre, noeud sauv, char c){
   if (arbre -> freres != NULL){ // on va dans le frere
     lib_arbre(arbre_originel, arbre -> freres, arbre, 'f');
@@ -166,7 +166,7 @@ void lib_arbre (noeud arbre_originel, noeud arbre, noeud sauv, char c){
 
 }
 
-/*Lecture et construction de l'arbre*/
+
 noeud creation_arbre (void){
   //Ouverture fichier:
   FILE *fp = fopen ("FR.txt","r");
