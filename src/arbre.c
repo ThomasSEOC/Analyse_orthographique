@@ -119,7 +119,7 @@ int compare (char* ch, noeud arbre){ // si nn et 1 si oui
     return 1;
   }
 
-  printf ("Ce mot n'est pas dans le dictionnaire, il manque des lettres\n");
+  //printf ("Ce mot n'est pas dans le dictionnaire, il manque des lettres\n");
   return 0;
 }
 
@@ -211,6 +211,6 @@ noeud creation_arbre (void){
       //On revient dans le père de tous et on recommence
   }
 
-  printf ("arbre créé");
+  //printf ("arbre créé");
   return arbre;
 }
