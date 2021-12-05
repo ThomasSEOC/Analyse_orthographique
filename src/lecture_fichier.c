@@ -17,7 +17,7 @@ void analyse_livre_arbre_prefixe(char* filename, noeud arbre){
       exit(EXIT_FAILURE);
   }
 
-
+  liste mots_abs = NULL;
   char file_contents[30];
   int cpt=0; // Compte le nombre de mots n'étant pas dans le dictionnaire
 
@@ -48,16 +48,22 @@ void analyse_livre_arbre_prefixe(char* filename, noeud arbre){
     word = strtok(file_contents," \0");
     while(word != NULL)
     {
-      if(!compare(word, arbre))
-      {
-        printf("%s | ", word);
-        
-        cpt++;
+      if (presence(word, mots_abs)){
+        cpt ++;
+      }
+      else{
+        if(!compare(word, arbre))
+        {
+          //printf("%s | ", word);
+          insere_tete(word,&mots_abs);
+          cpt++;
 
+        }
       }
       word = strtok(NULL," ");
     }
   }
+  affiche(mots_abs);
   printf("\nNombre de mot n'existant pas : %d\n", cpt);
   fclose(p);
 }

@@ -18,7 +18,7 @@ void affiche (liste l){
 
 void insere_tete(char* nouveau, liste* pl){
   liste p = malloc(sizeof(*p));
-  char *ch;
+  //char *ch;
   if(p == NULL){
     fprintf( stderr, "Fatal: Unable to allocate new list link.\n" );
     exit(EXIT_FAILURE);
@@ -30,10 +30,11 @@ void insere_tete(char* nouveau, liste* pl){
   //   *pl = p;
   //   return;
   // }
-  strcpy(ch, nouveau) ;
-  p -> value = ch;
+  printf("%s\n",nouveau);
+  strcpy(p -> value, nouveau);
+  //p -> value = ch;
   p -> occurence = 1;
-  p->next = *pl ;
+  p -> next = *pl ;
   *pl = p ;
   printf("%s\n",(*pl) -> value);
 
@@ -74,8 +75,10 @@ bool presence(char* valeur, liste l){
 // int main(){
 //   liste l = NULL;
 //   //l->value = "loic";
-//   insere_tete("hello",&l);
-//   insere_tete("mme",&l);
+//   char* ch = "hello";
+//   insere_tete(ch,&l);
+//   //ch[1] = '2';
+//   insere_tete("bonsoir",&l);
 //   insere_tete("thomas",&l);
 //   insere_tete("ich",&l);
 //   insere_tete("ekip",&l);
