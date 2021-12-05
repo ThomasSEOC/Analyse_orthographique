@@ -8,9 +8,9 @@
 
 void affiche (liste l){
   liste p = l ;
-  while(p->next !=NULL){
+  while(p -> next != NULL){
     printf("mot : %s | ", p->value);
-    p=p->next;
+    p = p -> next;
   }
   printf("\n");
 }
@@ -18,18 +18,27 @@ void affiche (liste l){
 
 void insere_tete(char* nouveau, liste* pl){
   liste p = malloc(sizeof(*p));
-
+  if (*pl == NULL){
+    p -> value = nouveau;
+    p -> occurence = 1;
+    *pl = p;
+    return;
+  }
   if(p == NULL){
     fprintf( stderr, "Fatal: Unable to allocate new list link.\n" );
     exit(EXIT_FAILURE);
   }
 
   p->value = nouveau ;
+  p -> occurence = 1;
   p->next = *pl ;
   *pl = p ;
 }
 
 int taille(liste l){
+  if (l == NULL){
+    return 0;
+  }
   int n=1;
   while(l->next != NULL){
     n++;
@@ -42,6 +51,7 @@ int taille(liste l){
 bool presence(char* valeur, liste l){
   for(liste p = l; p != NULL; p = p->next){
     if(strcmp(p->value,valeur) == 0){
+      p -> occurence ++;
       printf("Le mot '%s' est présent dans la liste\n",valeur);
       return(true);
     }
@@ -52,10 +62,9 @@ bool presence(char* valeur, liste l){
 
 
 
-
 int main(){
-  liste l = malloc(sizeof(*l));
-  l->value = "loic";
+  liste l = NULL;
+  //l->value = "loic";
   insere_tete("hello",&l);
   insere_tete("mme",&l);
   insere_tete("thomas",&l);

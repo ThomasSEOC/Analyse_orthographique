@@ -43,13 +43,18 @@ void analyse_livre_arbre_prefixe(char* filename, noeud arbre){
     // Exemple : pour "peut etre ", on aura accès dans le while à "peut", puis à "etre" à l'itération suivante
     // C'est dans cette boucle while qu'on vérifie si le mot obtenu est dans l'arbre
     char *word;
+    liste l;
     word = strtok(file_contents," \0");
     while(word != NULL)
     {
       if(!compare(word, arbre))
       {
         printf("%s | ", word);
+        if (!presence (word, l)){
+          insere_tete(word, &l);
+        }
         cpt++;
+
       }
       word = strtok(NULL," ");
     }
