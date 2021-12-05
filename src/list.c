@@ -24,12 +24,6 @@ void insere_tete(char* nouveau, liste* pl){
     exit(EXIT_FAILURE);
   }
 
-  // if (*pl == NULL){
-  //   p -> value = nouveau;
-  //   p -> occurence = 1;
-  //   *pl = p;
-  //   return;
-  // }
   printf("%s\n",nouveau);
   strcpy(p -> value, nouveau);
   //p -> value = ch;
@@ -72,24 +66,24 @@ bool presence(char* valeur, liste l){
 
 
 
-// int main(){
-//   liste l = NULL;
-//   //l->value = "loic";
-//   char* ch = "hello";
-//   insere_tete(ch,&l);
-//   //ch[1] = '2';
-//   insere_tete("bonsoir",&l);
-//   insere_tete("thomas",&l);
-//   insere_tete("ich",&l);
-//   insere_tete("ekip",&l);
-//
-//   affiche(l);
-//   printf("Taille de la liste :%d\n",taille(l));
-//
-//   presence("ekip",l);
-//   presence("salut",l);
-//   return EXIT_SUCCESS ;
-// }
+int main(){
+  liste l = NULL;
+  //l->value = "loic";
+  char* ch = "hello";
+  insere_tete(ch,&l);
+  //ch[1] = '2';
+  insere_tete("bonsoir",&l);
+  insere_tete("thomas",&l);
+  insere_tete("ich",&l);
+  insere_tete("ekip",&l);
+
+  affiche(l);
+  printf("Taille de la liste :%d\n",taille(l));
+
+  presence("ekip",l);
+  presence("salut",l);
+  return EXIT_SUCCESS ;
+}
 
 /*
 FILE *p = fopen(filename, "r");

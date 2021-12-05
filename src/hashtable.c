@@ -19,7 +19,9 @@ void insere_tete(T nouveau, liste* pl){
   liste p = malloc(sizeof(*p));
 
   if (*pl == NULL){
-    p -> val = nouveau;
+    //p -> val = nouveau;
+    strcpy(p -> val, nouveau);
+
     *pl = p;
     return;
   }
@@ -29,7 +31,7 @@ void insere_tete(T nouveau, liste* pl){
     exit(EXIT_FAILURE);
   }
 
-  p->val = nouveau ;
+  strcpy(p -> val, nouveau);
   p->next = *pl ;
   *pl = p ;
 }
@@ -37,7 +39,8 @@ void insere_tete(T nouveau, liste* pl){
 
 void affiche_liste (liste l){
   liste p = l ;
-  while(p -> next != NULL){
+  while(p != NULL){
+
     printf("mot : %s | ", p->val);
     p = p -> next;
   }
@@ -98,9 +101,12 @@ void afficher_table(table_hachage* ht){
 
 int main(){
   liste l;
+  printf("hello");
   //l->val = "loic";
-  insere_tete("hello",&l);
-  insere_tete("mme",&l);
+  char ch[10] = "hello";
+  insere_tete(ch,&l);
+  ch[2] = '5';
+  insere_tete(ch,&l);
   insere_tete("thomas",&l);
   insere_tete("ich",&l);
   insere_tete("ekip",&l);

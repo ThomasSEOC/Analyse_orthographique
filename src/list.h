@@ -6,7 +6,7 @@
 #include <stdbool.h>
 
 struct cellule {
-    char* value;
+    char value[26];
     int occurence ;
     struct cellule* next;
 };

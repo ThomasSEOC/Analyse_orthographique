@@ -7,7 +7,7 @@
 typedef char* T;
 
 typedef struct _cellule {
-  T val;
+  char val[26]; //T val
   struct _cellule* next;
 } cellule;
 typedef cellule* liste;
