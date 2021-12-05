@@ -3,6 +3,7 @@
 #include <string.h>
 #include <ctype.h>
 #include "arbre.h"
+#include "dicoliste.h"
 #include "lecture_fichier.h"
 
 
