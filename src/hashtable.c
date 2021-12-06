@@ -37,14 +37,14 @@ void insere_tete(T nouveau, liste* pl){
 }
 
 
-void affiche_liste (liste l){
+void display_liste (liste l){
   liste p = l ;
   while(p != NULL){
 
-    printf("mot : %s | ", p->val);
+    printf("%s | ", p->val);
     p = p -> next;
   }
-  printf("\n");
+  //printf("\n");
 }
 
 int hash (T word){
@@ -63,7 +63,7 @@ bool identiques(T elem_1, T elem_2){
   return false;
 }
 
-bool est_present(T elem, table_hachage* ht){
+bool is_present(T elem, table_hachage* ht){
   int hash_value = hash(elem);
   liste l=ht->table[hash_value];
   while (l != NULL){
@@ -77,9 +77,8 @@ bool est_present(T elem, table_hachage* ht){
 
 void inserer_sans_redimensionner(T element, table_hachage* ht){
   int hash_value = hash(element);
-  liste l=ht->table[hash_value];
   ht->nb_elements++;
-  insere_tete(element,&l);
+  insere_tete(element,&ht->table[hash_value]);
 }
 
 void afficher_table(table_hachage* ht){
@@ -88,34 +87,54 @@ void afficher_table(table_hachage* ht){
   {
     if(ht->table[i]!=NULL)
     {
-      printf("{ hash n°%d :",i);
-      affiche_liste(ht->table[i]);
-      printf("}\n");
+      printf("\nHash n°%d :",i);
+      display_liste(ht->table[i]);
+      printf("\n");
     }
   }
   printf("}\n");
 }
 
-
-
-
-int main(){
-  liste l;
-  printf("hello");
-  //l->val = "loic";
-  char ch[10] = "hello";
-  insere_tete(ch,&l);
-  ch[2] = '5';
-  insere_tete(ch,&l);
-  insere_tete("thomas",&l);
-  insere_tete("ich",&l);
-  insere_tete("ekip",&l);
-
-  affiche_liste(l);
-
-
-  printf("%d hash de %s\n",hash("salut"),"salut");
-  printf("%d hash de %s\n",hash("bonjour"),"bonjour");
-
-  return EXIT_SUCCESS;
+void free_hashtable(table_hachage* ht){
+  for(int i=0; i<ht->capacite;i++){
+    free(ht->table[i]);
+    //Libérer la liste (et non le maillon)
+  }
+  free(ht->table);
 }
+
+ table_hachage new_hashtable(int capacite,int capacite_initiale){
+   table_hachage ht;
+   ht.capacite = capacite;
+   ht.capacite_initiale = capacite_initiale;
+   ht.nb_elements = 0;
+   ht.table = calloc(ht.capacite,sizeof(liste));
+   for(int i=0 ; i<ht.capacite ; i++){
+     ht.table[i] = NULL;
+   }
+   return ht;
+}
+
+table_hachage generation_dico(){
+  table_hachage ht = new_hashtable(200,200);
+  FILE *p = fopen ("FR.txt","r");
+  char ch[30];
+  while ( fgets (ch, 30, p) != NULL){
+    if(ch[strlen(ch)-1] == '\n'){
+      ch[strlen(ch)-1] = '\0';
+    }
+    inserer_sans_redimensionner(ch,&ht);
+  }
+  return(ht);
+}
+
+
+
+// int main(){
+//   printf("Début\n");
+//   table_hachage ht = generation_dico();
+//   afficher_table(&ht);
+//   printf("%d\nFin\n",ht.nb_elements);
+//
+//   return EXIT_SUCCESS;
+// }

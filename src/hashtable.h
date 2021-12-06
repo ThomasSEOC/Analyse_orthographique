@@ -1,7 +1,12 @@
 
-#ifndef __CONSOLE_H__
-#define __CONSOLE_H__
+#ifndef __HASHTABLE_H__
+#define __HASHTABLE_H__
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <string.h>
+#include "hashtable.h"
 
 
 typedef char* T;
@@ -20,6 +25,22 @@ typedef struct {
 } table_hachage;
 
 
-int hash (char* ch);
+void display_liste (liste l);
+
+int hash (T word);
+
+bool identiques(T elem_1, T elem_2);
+
+bool is_present(T elem, table_hachage* ht);
+
+void inserer_sans_redimensionner();
+
+void afficher_table(table_hachage* ht);
+
+void free_hashtable(table_hachage* ht);
+
+table_hachage new_hashtable(int capacite,int capacite_initiale);
+
+table_hachage generation_dico();
 
 #endif
