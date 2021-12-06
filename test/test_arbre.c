@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include "../../include/arbre.h"
-#include "../../include/lecture_fichier_arbre.h"
+#include "../include/arbre.h"
+#include "../include/lecture_fichier_arbre.h"
 
 
 int main(){

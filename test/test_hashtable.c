@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include "../../include/hashtable.h"
-#include "../../include/lecture_hashtable.h"
+#include "../include/hashtable.h"
+#include "../include/lecture_hashtable.h"
 
 
 int main(){
