@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
-#include "hashtable.h"
+#include "../../include/hashtable.h"
 
 #define PREMIER 13
 #define MODULO 200
@@ -25,7 +25,6 @@ void insere_tete(T nouveau, liste* pl){
     *pl = p;
     return;
   }
-
   if(p == NULL){
     fprintf( stderr, "Fatal: Unable to allocate new list link.\n" );
     exit(EXIT_FAILURE);
@@ -35,7 +34,6 @@ void insere_tete(T nouveau, liste* pl){
   p->next = *pl ;
   *pl = p ;
 }
-
 
 void display_liste (liste l){
   liste p = l ;

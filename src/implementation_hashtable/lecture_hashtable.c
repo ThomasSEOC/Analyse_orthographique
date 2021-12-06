@@ -3,8 +3,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-//#include "hashtable.h"
-#include "lecture_hashtable.h"
+#include "../../include/hashtable.h"
+#include "../../include/lecture_hashtable.h"
 
 
 
@@ -61,12 +61,4 @@ void analyse_livre_hashtable(char* filename, table_hachage ht){
   //affiche(mots_abs);
   printf("\nNombre de mot n'existant pas : %d\n", cpt);
   fclose(p);
-}
-
-int main(){
-  char* filename = "a_la_recherche_du_temps_perdu.txt" ;
-  table_hachage ht = generation_dico();
-  afficher_table(&ht);
-  //analyse_livre_hashtable(filename,ht);
-  return EXIT_SUCCESS ;
 }

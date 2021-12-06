@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "arbre.h"
 #include <string.h>
+#include "../../include/arbre.h"
 
 //noeud est déjà un pointeur
 

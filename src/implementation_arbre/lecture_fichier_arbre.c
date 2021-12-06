@@ -3,8 +3,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include "arbre.h"
-#include "list.h"
+#include "../../include/arbre.h"
+#include "../../include/list.h"
 
 
 
@@ -54,7 +54,6 @@ void analyse_livre_arbre_prefixe(char* filename, noeud arbre){
       else{
         if(!compare(word, arbre))
         {
-          //printf("%s | ", word);
           insere_tete(word,&mots_abs);
           cpt++;
 
@@ -64,6 +63,7 @@ void analyse_livre_arbre_prefixe(char* filename, noeud arbre){
     }
   }
   affiche(mots_abs);
-  printf("\nNombre de mot n'existant pas : %d\n", cpt);
+  printf("Nombre de mots n'étant pas dans le dictionnaire: %d\n", cpt);
+  printf("Nombre de mots uniques n'étant pas dans le dictionnaire :%d\n",taille(mots_abs));
   fclose(p);
 }

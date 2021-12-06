@@ -1,5 +1,5 @@
-#ifndef LECTURE_FICHIER
-#define LECTURE_FICHIER
+#ifndef LECTURE_HASHTABLE_H
+#define LECTURE_HASHTABLE_H
 
 #include <stdio.h>
 #include <stdlib.h>
