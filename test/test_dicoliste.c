@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include "../../include/dicoliste.h"
-#include "../../include/lecture_dicoliste.h"
+#include "../include/dicoliste.h"
+#include "../include/lecture_dicoliste.h"
 
 
 int main(){
