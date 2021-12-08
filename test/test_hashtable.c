@@ -16,8 +16,7 @@ int main(){
 
 /*
 A compiler dans "algorythme"
-gcc src/implementation_hashtable/test_hashtable.c src/implementation_hashtable/lecture_hashtable.c src/implementation_hashtable/hashtable.c -o exe/test_hashtable
-
+gcc test/test_hashtable.c src/implementation_hashtable/lecture_hashtable.c src/implementation_hashtable/hashtable.c -o bin/test_hashtable
 ./exe/test_hashtable
 
 */

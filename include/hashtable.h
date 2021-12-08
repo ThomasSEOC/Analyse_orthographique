@@ -42,6 +42,9 @@ void inserer_sans_redimensionner(T element, table_hachage* ht);
 //Affiche la table de hachage
 void afficher_table(table_hachage* ht);
 
+//Libère la mémoire allouée pour une liste
+void liberation_liste (liste l);
+
 //Libère la mémoire allouée pour la table de hachage
 void free_hashtable(table_hachage* ht);
 

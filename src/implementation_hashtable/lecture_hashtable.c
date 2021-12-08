@@ -17,7 +17,7 @@ void analyse_livre_hashtable(char* filename, table_hachage ht){
       exit(EXIT_FAILURE);
   }
 
-  liste mots_abs = NULL;
+  //liste mots_abs = NULL;
   char file_contents[30];
   int cpt=0; // Compte le nombre de mots n'étant pas dans le dictionnaire
 
@@ -48,13 +48,13 @@ void analyse_livre_hashtable(char* filename, table_hachage ht){
     word = strtok(file_contents," \0");
     while(word != NULL)
     {
-      // if(!is_present(word,&ht))
-      // {
-      //   printf("%s | ", word);
-      //   //insere_tete(word,&mots_abs);
-      //   cpt++;
-      // }
-      printf("%s | ", word);
+      if(!is_present(word,&ht))
+      {
+        //printf("%s | ", word);
+        //insere_tete(word,&mots_abs);
+        cpt++;
+      }
+      //printf("%s | ", word);
       word = strtok(NULL," ");
     }
   }
@@ -62,3 +62,11 @@ void analyse_livre_hashtable(char* filename, table_hachage ht){
   printf("\nNombre de mot n'existant pas : %d\n", cpt);
   fclose(p);
 }
+
+// int main(){
+//   char* filename = "a_la_recherche_du_temps_perdu.txt" ;
+//   table_hachage ht = generation_dico();
+//   //afficher_table(&ht);
+//   analyse_livre_hashtable(filename,ht);
+//   return EXIT_SUCCESS ;
+// }

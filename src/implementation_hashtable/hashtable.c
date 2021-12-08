@@ -4,7 +4,6 @@
 #include <string.h>
 #include "../../include/hashtable.h"
 
-#define PREMIER 13
 #define MODULO 200
 
 int puissance(int x, int y){
@@ -45,12 +44,15 @@ void display_liste (liste l){
   //printf("\n");
 }
 
+
+
 int hash (T word){
   int hash = 0;
   for (int i = 0; i < strlen(word); i++){
-    hash += word[i]*puissance(PREMIER,i);
+    hash += word[i]*puissance(2,i);
   }
   hash %= MODULO;
+  //printf("%s hash : %d",word,hash);
   return hash;
 }
 
@@ -93,12 +95,21 @@ void afficher_table(table_hachage* ht){
   printf("}\n");
 }
 
+void liberation_liste (liste l){
+  liste p = l;
+  while (p != NULL){
+    p = l -> next;
+    free (l);
+    l = p;
+  }
+}
+
 void free_hashtable(table_hachage* ht){
   for(int i=0; i<ht->capacite;i++){
-    free(ht->table[i]);
+    liberation_liste(ht->table[i]);
     //Libérer la liste (et non le maillon)
   }
-  free(ht->table);
+  //free(ht->table);
 }
 
  table_hachage new_hashtable(int capacite,int capacite_initiale){
@@ -114,7 +125,7 @@ void free_hashtable(table_hachage* ht){
 }
 
 table_hachage generation_dico(){
-  table_hachage ht = new_hashtable(200,200);
+  table_hachage ht = new_hashtable(MODULO,MODULO);
   FILE *p = fopen ("FR.txt","r");
   char ch[30];
   while ( fgets (ch, 30, p) != NULL){
@@ -133,6 +144,7 @@ table_hachage generation_dico(){
 //   table_hachage ht = generation_dico();
 //   afficher_table(&ht);
 //   printf("%d\nFin\n",ht.nb_elements);
+//   free_hashtable(&ht);
 //
 //   return EXIT_SUCCESS;
 // }
