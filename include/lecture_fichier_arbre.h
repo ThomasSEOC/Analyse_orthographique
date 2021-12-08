@@ -8,9 +8,16 @@
 #include "arbre.h"
 
 
-// Lit un fichier texte et vérifie si ils sont ou non dans le dictionnaire francais
-// La recherche dans le dictionnaire emploie la méthode de l'arbre préfixé
-// Les mots qui ne sont pas dans le dictionnaire sont affichés à l'écran
-void analyse_livre_arbre_prefixe(char* filename, noeud arbre);
+
+// Cette version du code affiche à l'écran les mots qui ne sont pas dans le dictionnaire.
+// L'affichage supprime les doublons et indique le nombre de fois que chaque mot apparait
+// Il affiche finalement à l'écran le nombre de mots qui ne sont pas dans le dictionnaire sans puis avec suppression des doublons.
+void analyse_livre_arbre_prefixe_sans_doublons(char* filename, noeud arbre);
+
+// Cette version du code affiche à l'écran le nombre de mots qui ne sont pas dans le dictionnaire.
+void analyse_livre_arbre_prefixe_avec_doublons(char* filename, noeud arbre);
+
+
+
 
 #endif

@@ -4,8 +4,9 @@
 #include <string.h>
 #include "../../include/hashtable.h"
 
-#define MODULO 100000
+#define MODULO 100000 // taille de la table
 #define PREMIER 3
+
 
 int puissance(int x, int y){
   int resultat=1;
@@ -15,11 +16,12 @@ int puissance(int x, int y){
     return resultat;
 }
 
+
+
 void insere_tete_classique(T nouveau, liste* pl){
   liste p = malloc(sizeof(*p));
 
   if (*pl == NULL){
-    //p -> val = nouveau;
     strcpy(p -> val, nouveau);
 
     *pl = p;
@@ -35,6 +37,8 @@ void insere_tete_classique(T nouveau, liste* pl){
   *pl = p ;
 }
 
+
+
 void display_liste (liste l){
   liste p = l ;
   while(p != NULL){
@@ -42,19 +46,20 @@ void display_liste (liste l){
     printf("%s | ", p->val);
     p = p -> next;
   }
-  //printf("\n");
 }
+
+
 
 unsigned long hash (T word){
   unsigned long hash = 0;
   for (int i = 0; i < strlen(word); i++){
     hash += word[i]*puissance(PREMIER,i);
   }
-  //printf("%s hash sans modulo: %ld",word,hash);
   hash %= MODULO;
-  //printf("\t\tet avec modulo : %ld\n",hash);
   return hash;
 }
+
+
 
 bool identiques(T elem_1, T elem_2){
   if(strcmp(elem_1,elem_2)==0){
@@ -62,6 +67,8 @@ bool identiques(T elem_1, T elem_2){
   }
   return false;
 }
+
+
 
 bool is_present(T elem, table_hachage* ht){
   unsigned long hash_value = hash(elem);
@@ -75,11 +82,15 @@ bool is_present(T elem, table_hachage* ht){
   return false;
 }
 
+
+
 void inserer_sans_redimensionner(T element, table_hachage* ht){
   unsigned long hash_value = hash(element);
   ht->nb_elements++;
   insere_tete_classique(element,&ht->table[hash_value]);
 }
+
+
 
 void afficher_table(table_hachage* ht){
   printf("{\n");
@@ -95,6 +106,8 @@ void afficher_table(table_hachage* ht){
   printf("}\n");
 }
 
+
+
 void liberation_liste (liste l){
   liste p = l;
   while (p != NULL){
@@ -104,6 +117,8 @@ void liberation_liste (liste l){
   }
 }
 
+
+
 void free_hashtable(table_hachage* ht){
   for(int i=0; i<ht->capacite;i++){
     liberation_liste(ht->table[i]);
@@ -111,6 +126,8 @@ void free_hashtable(table_hachage* ht){
   }
   free(ht->table);
 }
+
+
 
  table_hachage new_hashtable(int capacite){
    table_hachage ht;
@@ -123,6 +140,8 @@ void free_hashtable(table_hachage* ht){
    return ht;
 }
 
+
+
 table_hachage generation_dico(){
   table_hachage ht = new_hashtable(MODULO);
   FILE *p = fopen ("FR.txt","r");
@@ -133,18 +152,6 @@ table_hachage generation_dico(){
     }
     inserer_sans_redimensionner(ch,&ht);
   }
-
+  fclose(p);
   return(ht);
 }
-
-
-
-// int main(){
-//   printf("Début\n");
-//   table_hachage ht = generation_dico();
-//   afficher_table(&ht);
-//   printf("%d\nFin\n",ht.nb_elements);
-//   free_hashtable(&ht);
-//
-//   return EXIT_SUCCESS;
-// }
