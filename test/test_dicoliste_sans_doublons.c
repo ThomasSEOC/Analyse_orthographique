@@ -6,9 +6,9 @@
 #include "../include/dicoliste.h"
 #include "../include/lecture_dicoliste.h"
 
-// Test de la vérification orthographique avec une liste simple.
-// Ce main permet de tester la méthode avec deux affichages différents (explication dans src/implementation_hashtable/lecture_hashtanle.c)
-// Le main renvoie le nombre de mots n'étant pas dans le dictionnaire et le temps d'exécution du programme (relatif à l'ordinateur qui exécute)
+// Test de la vérification orthographique avec une liste chainée.
+// Le main renvoie le nombre de mots (sans les doublons) n'étant pas dans le dictionnaire et affiche le nombre de fois que ces mots apparaissent.
+// Il calcule également le temps d'exécution du programme (relatif à l'ordinateur qui exécute).
 
 int main(){
   clock_t ti, tf;
@@ -18,8 +18,7 @@ int main(){
   char* filename = "a_la_recherche_du_temps_perdu.txt" ;
   plistedge liste = NULL;
   liste = creation_liste(liste);
-  // Choisir un des deux programmes : (il faut en commenter un et un seul.)
-  //analyse_livre_dicoliste_avec_doublons(filename,liste);
+
   analyse_livre_dicoliste_sans_doublons(filename,liste);
 
   tf = clock();
