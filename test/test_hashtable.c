@@ -9,8 +9,9 @@
 int main(){
   char* filename = "a_la_recherche_du_temps_perdu.txt" ;
   table_hachage ht = generation_dico();
-  afficher_table(&ht);
+  //afficher_table(&ht);
   //analyse_livre_hashtable(filename,ht);
+  free_hashtable(&ht);
   return EXIT_SUCCESS ;
 }
 
