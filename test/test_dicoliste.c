@@ -10,7 +10,6 @@
 // Ce main permet de tester la méthode avec deux affichages différents (explication dans src/implementation_hashtable/lecture_hashtanle.c)
 // Le main renvoie le nombre de mots n'étant pas dans le dictionnaire et le temps d'exécution du programme (relatif à l'ordinateur qui exécute)
 
-
 int main(){
   clock_t ti, tf;
   double temps;
@@ -30,10 +29,3 @@ int main(){
 
   return EXIT_SUCCESS ;
 }
-
-/*
-A compiler dans "algorythme"
-gcc src/implementation_dicoliste/test_dicoliste.c src/implementation_dicoliste/dicoliste.c src/implementation_dicoliste/lecture_dicoliste.c src/list.c -o exe/test_dicoliste
-./exe/test_dicoliste
-
-*/

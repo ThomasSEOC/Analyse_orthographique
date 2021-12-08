@@ -3,7 +3,6 @@
 #include <string.h>
 #include <ctype.h>
 #include <time.h>
-
 #include "../include/arbre.h"
 #include "../include/lecture_fichier_arbre.h"
 
@@ -21,7 +20,7 @@ int main(){
 
   // Choisir un des deux programmes : (il faut en commenter un et un seul.)
   analyse_livre_arbre_prefixe_avec_doublons(filename,arbre);
-  //analyse_livre_arbre_prefixe_sans_doublons(filename,arbre);
+  // analyse_livre_arbre_prefixe_sans_doublons(filename,arbre);
 
 
   tf = clock();
@@ -30,11 +29,3 @@ int main(){
 
   return EXIT_SUCCESS ;
 }
-
-/*
-A compiler dans "algorythme"
-gcc src/implementation_arbre/test_arbre.c src/implementation_arbre/arbre.c src/implementation_arbre/lecture_fichier_arbre.c src/list.c -o exe/test_arbre
-
-./exe/test_arbre
-
-*/
