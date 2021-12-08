@@ -5,6 +5,7 @@
 #include <ctype.h>
 #include "../../include/hashtable.h"
 #include "../../include/lecture_hashtable.h"
+#include "../../include/list.h"
 
 
 
@@ -17,7 +18,7 @@ void analyse_livre_hashtable(char* filename, table_hachage ht){
       exit(EXIT_FAILURE);
   }
 
-  //liste mots_abs = NULL;
+  liste_abs mots_abs = NULL;
   char file_contents[30];
   int cpt=0; // Compte le nombre de mots n'étant pas dans le dictionnaire
 
@@ -44,22 +45,27 @@ void analyse_livre_hashtable(char* filename, table_hachage ht){
     // Exemple : pour "peut etre ", on aura accès dans le while à "peut", puis à "etre" à l'itération suivante
     // C'est dans cette boucle while qu'on vérifie si le mot obtenu est dans l'arbre
     char *word;
-    liste l;
     word = strtok(file_contents," \0");
     while(word != NULL)
     {
-      if(!is_present(word,&ht))
+      if (presence_abs(word, mots_abs))
       {
-        //printf("%s | ", word);
-        //insere_tete(word,&mots_abs);
-        cpt++;
+        cpt ++;
       }
-      //printf("%s | ", word);
+      else{
+        if(!is_present(word, &ht))
+        {
+          insere_tete_abs(word,&mots_abs);
+          cpt++;
+        }
+      }
       word = strtok(NULL," ");
     }
   }
-  //affiche(mots_abs);
+  affiche_abs(mots_abs);
+  liberation_liste_abs(mots_abs);
   printf("\nNombre de mot n'existant pas : %d\n", cpt);
+  printf("Nombre de mots uniques n'étant pas dans le dictionnaire :%d\n",taille_abs(mots_abs));
   fclose(p);
 }
 

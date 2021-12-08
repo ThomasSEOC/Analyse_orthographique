@@ -14,7 +14,7 @@ test_dicoliste :
 		gcc test/test_dicoliste.c src/implementation_dicoliste/dicoliste.c src/implementation_dicoliste/lecture_dicoliste.c src/list.c -g -std=c99 -o bin/test_dicoliste
 
 test_hashtable :
-		gcc test/test_hashtable.c src/implementation_hashtable/lecture_hashtable.c src/implementation_hashtable/hashtable.c -g -std=c99 -o bin/test_hashtable
+		gcc test/test_hashtable.c src/implementation_hashtable/lecture_hashtable.c src/implementation_hashtable/hashtable.c src/list.c -g -std=c99 -o bin/test_hashtable
 
 
 

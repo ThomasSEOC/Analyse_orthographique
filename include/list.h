@@ -10,22 +10,23 @@ struct cellule {
     int occurence ;
     struct cellule* next;
 };
-typedef struct cellule* liste;
+typedef struct cellule* liste_abs;
 
 //Affiche une liste
-void affiche (liste l);
+void affiche_abs (liste_abs l);
 
 //Ajoute un char* en tête de liste
-void insere_tete(char* nouveau, liste* pl);
-
-//Ajoute un char* en fin de liste
-void insere_queue(char* nouveau, liste* pl);
+void insere_tete_abs(char* nouveau, liste_abs* pl);
 
 //Renvoie un booléen : true si 'valeur' est dans la liste l, false sinon
-bool presence(char* valeur, liste l);
+bool presence_abs(char* valeur, liste_abs l);
 
 //Renvoie la taille d'une liste
-int taille(liste l);
+int taille_abs(liste_abs l);
+
+//Libere la mémoire allouée pour une liste chainée
+void liberation_liste_abs (liste_abs l);
+
 
 
 #endif

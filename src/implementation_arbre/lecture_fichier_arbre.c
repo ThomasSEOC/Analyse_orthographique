@@ -17,7 +17,7 @@ void analyse_livre_arbre_prefixe(char* filename, noeud arbre){
       exit(EXIT_FAILURE);
   }
 
-  liste mots_abs = NULL;
+  liste_abs mots_abs = NULL;
   char file_contents[30];
   int cpt=0; // Compte le nombre de mots n'étant pas dans le dictionnaire
 
@@ -44,17 +44,16 @@ void analyse_livre_arbre_prefixe(char* filename, noeud arbre){
     // Exemple : pour "peut etre ", on aura accès dans le while à "peut", puis à "etre" à l'itération suivante
     // C'est dans cette boucle while qu'on vérifie si le mot obtenu est dans l'arbre
     char *word;
-    liste l;
     word = strtok(file_contents," \0");
     while(word != NULL)
     {
-      if (presence(word, mots_abs)){
+      if (presence_abs(word, mots_abs)){
         cpt ++;
       }
       else{
         if(!compare(word, arbre))
         {
-          insere_tete(word,&mots_abs);
+          insere_tete_abs(word,&mots_abs);
           cpt++;
 
         }
@@ -62,8 +61,9 @@ void analyse_livre_arbre_prefixe(char* filename, noeud arbre){
       word = strtok(NULL," ");
     }
   }
-  affiche(mots_abs);
+  affiche_abs(mots_abs);
+  liberation_liste_abs(mots_abs);
   printf("Nombre de mots n'étant pas dans le dictionnaire: %d\n", cpt);
-  printf("Nombre de mots uniques n'étant pas dans le dictionnaire :%d\n",taille(mots_abs));
+  printf("Nombre de mots uniques n'étant pas dans le dictionnaire :%d\n",taille_abs(mots_abs));
   fclose(p);
 }

@@ -4,7 +4,8 @@
 #include <string.h>
 #include "../../include/hashtable.h"
 
-#define MODULO 200
+#define MODULO 100000
+#define PREMIER 3
 
 int puissance(int x, int y){
   int resultat=1;
@@ -14,7 +15,7 @@ int puissance(int x, int y){
     return resultat;
 }
 
-void insere_tete(T nouveau, liste* pl){
+void insere_tete_classique(T nouveau, liste* pl){
   liste p = malloc(sizeof(*p));
 
   if (*pl == NULL){
@@ -44,15 +45,14 @@ void display_liste (liste l){
   //printf("\n");
 }
 
-
-
-int hash (T word){
-  int hash = 0;
+unsigned long hash (T word){
+  unsigned long hash = 0;
   for (int i = 0; i < strlen(word); i++){
-    hash += word[i]*puissance(2,i);
+    hash += word[i]*puissance(PREMIER,i);
   }
+  //printf("%s hash sans modulo: %ld",word,hash);
   hash %= MODULO;
-  //printf("%s hash : %d",word,hash);
+  //printf("\t\tet avec modulo : %ld\n",hash);
   return hash;
 }
 
@@ -64,8 +64,8 @@ bool identiques(T elem_1, T elem_2){
 }
 
 bool is_present(T elem, table_hachage* ht){
-  int hash_value = hash(elem);
-  liste l=ht->table[hash_value];
+  unsigned long hash_value = hash(elem);
+  liste l = ht->table[hash_value];
   while (l != NULL){
     if(identiques(elem,l->val)){
       return true;
@@ -76,18 +76,18 @@ bool is_present(T elem, table_hachage* ht){
 }
 
 void inserer_sans_redimensionner(T element, table_hachage* ht){
-  int hash_value = hash(element);
+  unsigned long hash_value = hash(element);
   ht->nb_elements++;
-  insere_tete(element,&ht->table[hash_value]);
+  insere_tete_classique(element,&ht->table[hash_value]);
 }
 
 void afficher_table(table_hachage* ht){
   printf("{\n");
-  for(int i=0 ; i<ht->capacite ; i++)
+  for(unsigned long i=0 ; i<ht->capacite ; i++)
   {
     if(ht->table[i]!=NULL)
     {
-      printf("\nHash n°%d :",i);
+      printf("\nHash n°%ld :",i);
       display_liste(ht->table[i]);
       printf("\n");
     }
@@ -109,13 +109,12 @@ void free_hashtable(table_hachage* ht){
     liberation_liste(ht->table[i]);
     //Libérer la liste (et non le maillon)
   }
-  //free(ht->table);
+  free(ht->table);
 }
 
- table_hachage new_hashtable(int capacite,int capacite_initiale){
+ table_hachage new_hashtable(int capacite){
    table_hachage ht;
    ht.capacite = capacite;
-   ht.capacite_initiale = capacite_initiale;
    ht.nb_elements = 0;
    ht.table = calloc(ht.capacite,sizeof(liste));
    for(int i=0 ; i<ht.capacite ; i++){
@@ -125,7 +124,7 @@ void free_hashtable(table_hachage* ht){
 }
 
 table_hachage generation_dico(){
-  table_hachage ht = new_hashtable(MODULO,MODULO);
+  table_hachage ht = new_hashtable(MODULO);
   FILE *p = fopen ("FR.txt","r");
   char ch[30];
   while ( fgets (ch, 30, p) != NULL){
@@ -134,6 +133,7 @@ table_hachage generation_dico(){
     }
     inserer_sans_redimensionner(ch,&ht);
   }
+
   return(ht);
 }
 

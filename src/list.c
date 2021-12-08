@@ -6,8 +6,8 @@
 
 
 
-void affiche (liste l){
-  liste p = l ;
+void affiche_abs (liste_abs l){
+  liste_abs p = l ;
   while(p != NULL){
     printf("Nb d'apparition de '%s' : %d\n", p->value, p -> occurence);
     p = p -> next;
@@ -16,8 +16,8 @@ void affiche (liste l){
 }
 
 
-void insere_tete(char* nouveau, liste* pl){
-  liste p = malloc(sizeof(*p));
+void insere_tete_abs(char* nouveau, liste_abs* pl){
+  liste_abs p = malloc(sizeof(*p));
   //char *ch;
   if(p == NULL){
     fprintf( stderr, "Fatal: Unable to allocate new list link.\n" );
@@ -33,7 +33,7 @@ void insere_tete(char* nouveau, liste* pl){
   return;
 }
 
-int taille(liste l){
+int taille_abs(liste_abs l){
   if (l == NULL){
     return 0;
   }
@@ -46,12 +46,12 @@ int taille(liste l){
 }
 
 
-bool presence(char* valeur, liste l){
+bool presence_abs(char* valeur, liste_abs l){
   //printf("fct pres");
   if (l == NULL){
     return false;
   }
-  for(liste p = l; p != NULL; p = p->next){
+  for(liste_abs p = l; p != NULL; p = p->next){
     if(strcmp(p->value,valeur) == 0){
       p -> occurence ++;
       //printf("Le mot '%s' est présent dans la liste\n",valeur);
@@ -62,10 +62,19 @@ bool presence(char* valeur, liste l){
   return(false);
 }
 
+void liberation_liste_abs (liste_abs l){
+  liste_abs p = l;
+  while (p != NULL){
+    p = l -> next;
+    free (l);
+    l = p;
+  }
+}
+
 
 
 // int main(){
-//   liste l = NULL;
+//   liste_abs l = NULL;
 //   //l->value = "loic";
 //   char* ch = "hello";
 //   insere_tete(ch,&l);

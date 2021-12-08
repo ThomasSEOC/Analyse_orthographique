@@ -24,11 +24,17 @@ typedef struct {
   unsigned capacite_initiale; /* utile lors du redimensionnement */
 } table_hachage;
 
+//Renvoie x élevé à la puissance y
+int puissance(int x, int y);
+
+//Insere le mot nouveau à la liste définie par pl
+void insere_tete_classique(T nouveau, liste* pl);
+
 //affiche une liste
 void display_liste (liste l);
 
 //Renvoie le hash d'un char*
-int hash (T word);
+unsigned long hash (T word);
 
 //Renvoie true si elem_1 et elem_2 sont identiques, false sinon
 bool identiques(T elem_1, T elem_2);
@@ -49,7 +55,7 @@ void liberation_liste (liste l);
 void free_hashtable(table_hachage* ht);
 
 //Renvoie une nouvelle table de hachage vide
-table_hachage new_hashtable(int capacite,int capacite_initiale);
+table_hachage new_hashtable(int capacite);
 
 //Renvoie une table de hachage contenant les mots du dictionnaire hachés selon la fonction de hashage
 table_hachage generation_dico();

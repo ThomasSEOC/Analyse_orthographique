@@ -4,6 +4,7 @@
 #include <string.h>
 #include <ctype.h>
 #include  "../../include/dicoliste.h"
+#include "../../include/list.h"
 
 
 int analyse_livre_dicoliste(char* filename, plistedge liste){
@@ -15,7 +16,7 @@ int analyse_livre_dicoliste(char* filename, plistedge liste){
       exit(EXIT_FAILURE);
   }
 
-
+  liste_abs mots_abs = NULL;
   char file_contents[30];
   int cpt=0; // Compte le nombre de mots n'étant pas dans le dictionnaire
 
@@ -45,14 +46,23 @@ int analyse_livre_dicoliste(char* filename, plistedge liste){
     word = strtok(file_contents," ");
     while(word != NULL)
     {
-      if(!est_present_liste(liste, word))
-      {
-        //printf("%s | ", word);
-        cpt++;
+      if (presence_abs(word, mots_abs)){
+        cpt ++;
+      }
+      else{
+        if(!est_present_liste(liste, word))
+        {
+          insere_tete_abs(word,&mots_abs);
+          cpt++;
+        }
       }
       word = strtok(NULL," ");
     }
   }
+
+  affiche_abs(mots_abs);
+  liberation_liste_abs(mots_abs);
   printf("\nNombre de mot n'existant pas : %d\n", cpt);
+  printf("Nombre de mots uniques n'étant pas dans le dictionnaire :%d\n",taille_abs(mots_abs));
   fclose(p);
 }
