@@ -71,9 +71,10 @@ void analyse_livre_arbre_prefixe_sans_doublons(char* filename, noeud arbre){
     }
   }
   affiche_abs(mots_abs);
-  liberation_liste_abs(mots_abs);
   printf("Nombre de mots n'étant pas dans le dictionnaire: %d\n", cpt);
   printf("Nombre de mots uniques n'étant pas dans le dictionnaire :%d\n",taille_abs(mots_abs));
+  liberation_liste_abs(mots_abs);
+
   fclose(p);
 }
 
