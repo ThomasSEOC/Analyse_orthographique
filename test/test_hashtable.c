@@ -19,8 +19,8 @@ int main(){
   table_hachage ht = generation_dico();
 
   // Choisir un des deux programmes : (il faut en commenter un et un seul.)
-  analyse_livre_hashtable_avec_doublons(filename,ht);
-  //analyse_livre_hashtable_sans_doublons(filename,ht);
+  //analyse_livre_hashtable_avec_doublons(filename,ht);
+  analyse_livre_hashtable_sans_doublons(filename,ht);
   free_hashtable(&ht);
 
   tf = clock();

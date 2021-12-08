@@ -50,7 +50,7 @@ void analyse_livre_hashtable_sans_doublons(char* filename, table_hachage ht){
     word = strtok(file_contents," \0");
     while(word != NULL)
     {
-      if (presence_abs(word, mots_abs))
+      /*if (presence_abs(word, mots_abs))
       {
         cpt ++;
       }
@@ -60,7 +60,17 @@ void analyse_livre_hashtable_sans_doublons(char* filename, table_hachage ht){
           insere_tete_abs(word,&mots_abs);
           cpt++;
         }
+      }*/
+      if(!is_present(word, &ht)){
+        cpt++;
+
+        if (!presence_abs(word, mots_abs)){
+
+          insere_tete_abs(word, &mots_abs);
+
+        }
       }
+
       word = strtok(NULL," ");
     }
   }
@@ -95,8 +105,8 @@ void analyse_livre_hashtable_avec_doublons(char* filename, table_hachage ht){
     // Exemple : "Peut-etre." devient "peut etre "
     for(int i=0 ; i<strlen(file_contents) ; i++)
     {
-      file_contents[i]=tolower(file_contents[i]);
-      if(file_contents[i]< 97 || file_contents[i]>122)
+      file_contents[i] = tolower(file_contents[i]);
+      if(file_contents[i] < 97 || file_contents[i] > 122)
       {
         file_contents[i] = ' ';
       }
@@ -108,7 +118,7 @@ void analyse_livre_hashtable_avec_doublons(char* filename, table_hachage ht){
     // C'est dans cette boucle while qu'on vérifie si le mot obtenu est dans l'arbre
     char *word;
     word = strtok(file_contents," \0");
-    while(word != NULL)
+    while( word != NULL)
     {
       if(!is_present(word, &ht))
       {

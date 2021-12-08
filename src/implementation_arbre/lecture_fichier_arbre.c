@@ -49,7 +49,7 @@ void analyse_livre_arbre_prefixe_sans_doublons(char* filename, noeud arbre){
     word = strtok(file_contents," \0");
     while(word != NULL)
     {
-      if (presence_abs(word, mots_abs)){
+      /*if (presence_abs(word, mots_abs)){
         cpt ++;
       }
       else{
@@ -59,7 +59,14 @@ void analyse_livre_arbre_prefixe_sans_doublons(char* filename, noeud arbre){
           cpt++;
 
         }
+      }*/
+      if(!compare(word, arbre)){
+        cpt++;
+        if (!presence_abs(word, mots_abs)){
+          insere_tete_abs(word, &mots_abs);
+        }
       }
+
       word = strtok(NULL," ");
     }
   }

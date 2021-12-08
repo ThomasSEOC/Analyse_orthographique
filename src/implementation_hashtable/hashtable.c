@@ -4,13 +4,14 @@
 #include <string.h>
 #include "../../include/hashtable.h"
 
-#define MODULO 100000 // taille de la table
+#define MODULO 1000000 // taille de la table
 #define PREMIER 3
 
 
 int puissance(int x, int y){
-  int resultat=1;
-    for(int i = 0; i<y;i++){
+
+  int resultat = 1;
+    for(int i = 0; i < y; i++){
       resultat *=x;
     }
     return resultat;
@@ -33,7 +34,7 @@ void insere_tete_classique(T nouveau, liste* pl){
   }
 
   strcpy(p -> val, nouveau);
-  p->next = *pl ;
+  p -> next = *pl ;
   *pl = p ;
 }
 
@@ -62,7 +63,7 @@ unsigned long hash (T word){
 
 
 bool identiques(T elem_1, T elem_2){
-  if(strcmp(elem_1,elem_2)==0){
+  if(strcmp(elem_1, elem_2) == 0){
     return true;
   }
   return false;
@@ -72,9 +73,9 @@ bool identiques(T elem_1, T elem_2){
 
 bool is_present(T elem, table_hachage* ht){
   unsigned long hash_value = hash(elem);
-  liste l = ht->table[hash_value];
+  liste l = ht -> table[hash_value];
   while (l != NULL){
-    if(identiques(elem,l->val)){
+    if(identiques(elem, l -> val)){
       return true;
     }
     l=l->next;
@@ -86,20 +87,20 @@ bool is_present(T elem, table_hachage* ht){
 
 void inserer_sans_redimensionner(T element, table_hachage* ht){
   unsigned long hash_value = hash(element);
-  ht->nb_elements++;
-  insere_tete_classique(element,&ht->table[hash_value]);
+  ht -> nb_elements++;
+  insere_tete_classique(element, &ht -> table[hash_value]);
 }
 
 
 
 void afficher_table(table_hachage* ht){
   printf("{\n");
-  for(unsigned long i=0 ; i<ht->capacite ; i++)
+  for(unsigned long i=0 ; i < ht -> capacite ; i++)
   {
-    if(ht->table[i]!=NULL)
+    if(ht -> table[i] != NULL)
     {
       printf("\nHash n°%ld :",i);
-      display_liste(ht->table[i]);
+      display_liste(ht -> table[i]);
       printf("\n");
     }
   }
@@ -120,11 +121,11 @@ void liberation_liste (liste l){
 
 
 void free_hashtable(table_hachage* ht){
-  for(int i=0; i<ht->capacite;i++){
-    liberation_liste(ht->table[i]);
+  for(int i = 0; i < ht -> capacite; i++){
+    liberation_liste(ht -> table[i]);
     //Libérer la liste (et non le maillon)
   }
-  free(ht->table);
+  free(ht -> table);
 }
 
 
@@ -134,7 +135,8 @@ void free_hashtable(table_hachage* ht){
    ht.capacite = capacite;
    ht.nb_elements = 0;
    ht.table = calloc(ht.capacite,sizeof(liste));
-   for(int i=0 ; i<ht.capacite ; i++){
+   for(int i = 0 ; i < ht.capacite ; i++){
+
      ht.table[i] = NULL;
    }
    return ht;
@@ -150,7 +152,7 @@ table_hachage generation_dico(){
     if(ch[strlen(ch)-1] == '\n'){
       ch[strlen(ch)-1] = '\0';
     }
-    inserer_sans_redimensionner(ch,&ht);
+    inserer_sans_redimensionner(ch, &ht);
   }
   fclose(p);
   return(ht);

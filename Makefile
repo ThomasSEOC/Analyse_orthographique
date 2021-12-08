@@ -10,6 +10,7 @@ all : test_arbre test_dicoliste test_hashtable
 test_arbre :
 		gcc test/test_arbre.c src/implementation_arbre/arbre.c src/implementation_arbre/lecture_fichier_arbre.c src/list.c -g -std=c99 -o bin/test_arbre
 
+
 test_dicoliste :
 		gcc test/test_dicoliste.c src/implementation_dicoliste/dicoliste.c src/implementation_dicoliste/lecture_dicoliste.c src/list.c -g -std=c99 -o bin/test_dicoliste
 
@@ -18,11 +19,11 @@ test_hashtable :
 
 
 
-exe_arbre : test_arbre
+exe_arbre :
 		./bin/test_arbre
 
-exe_hashtable : test_hashtable
+exe_hashtable :
 		./bin/test_hashtable
 
-exe_dicoliste : test_dicoliste
+exe_dicoliste :
 		./bin/test_dicoliste

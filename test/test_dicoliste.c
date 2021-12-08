@@ -18,10 +18,9 @@ int main(){
   char* filename = "a_la_recherche_du_temps_perdu.txt" ;
   plistedge liste = NULL;
   liste = creation_liste(liste);
-
   // Choisir un des deux programmes : (il faut en commenter un et un seul.)
-  analyse_livre_dicoliste_avec_doublons(filename,liste);
-  //analyse_livre_dicoliste_sans_doublons(filename,liste):
+  //analyse_livre_dicoliste_avec_doublons(filename,liste);
+  analyse_livre_dicoliste_sans_doublons(filename,liste);
 
   tf = clock();
   temps = (double)(tf-ti)/CLOCKS_PER_SEC;

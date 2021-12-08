@@ -77,7 +77,6 @@ noeud recherche (noeud liste, char c){
   }
 
   //A chaque appel, le noeud est supposé être dans la liste, ce message ne doit donc jamais s'afficher en principe.
-  printf ("Pas de noeud \n");
   return liste;
 }
 
@@ -125,46 +124,51 @@ int compare (char* ch, noeud arbre){ // si nn et 1 si oui
   return 0;
 }
 
-// Cette fonction ne fonctionne pas
-void lib_arbre (noeud arbre_originel, noeud arbre, noeud sauv, char c){
-  if (arbre -> freres != NULL){ // on va dans le frere
-    lib_arbre(arbre_originel, arbre -> freres, arbre, 'f');
+// Cette fonction ne fonctionne pas pour de longues allocations
+/*void lib_arbre(noeud arbre_originel, noeud arbre, noeud sauv, char c){
+  if (c == 'e'){
+    printf ("arbre libéré\n");
+    return ;
   }
-  if (arbre -> fils != NULL){ // on va dans le fils
-    lib_arbre (arbre_originel,arbre -> fils, arbre, 'p');
+  char a = arbre -> lettre;
+  //printf ("%c\n", a);
+  if (arbre -> fils != NULL){
+    sauv = arbre;
+    libarb (arbre_originel, arbre -> fils, sauv, 's');
+    return;
   }
-  if (arbre -> fils == NULL && arbre -> freres == NULL){
-    printf ("ON TRAITE LE CARACTERE %c\n", arbre -> lettre);
-    switch(c){
-      case 'f':
-      sauv -> freres = NULL;
-      printf ("le frr en question: %c\n", sauv -> lettre);
-      printf ("lib frr -> %c\n", arbre -> lettre);
 
-      free (arbre);
-      lib_arbre (arbre_originel, arbre_originel, arbre_originel, 'o');
-      break;
-      case 'p':
-      sauv -> fils = NULL;
-      printf ("le pere en question: %c\n", sauv -> lettre);
-      printf ("lib fils -> %c\n", arbre -> lettre);
-
-      free (arbre);
-      lib_arbre (arbre_originel, arbre_originel, arbre_originel, 'o');
-      break;
-      case 'o':
-      printf ("ben la normalement c'est fini\n");
-      //free (arbre_originel);
-      return;
-      break;
-      default:
-      printf ("ERROR FREE\n");
-      break;
-    }
+  if (arbre -> freres != NULL){
+    libarb (arbre_originel, arbre -> freres, arbre, 'b');
+    return;
   }
+
+  //Ici on arrive au fils le plus à gauche et le plus en bas.
+  switch(c){
+  case 's':// c'est le son
+    sauv -> fils = NULL;
+    free (arbre);
+    libarb(arbre_originel, arbre_originel, arbre_originel, 'o');
+    return;
+
+  case 'b':// brother
+    free (arbre);
+    sauv -> freres = NULL;
+    libarb(arbre_originel, arbre_originel, arbre_originel, 'o');
+    return;
+
+  case 'o':
+    free (arbre_originel);
+    libarb (NULL, NULL, NULL, 'e'); // end
+    return;
+
+  default:
+    printf ("error\n");
+    break;
+  }
+  printf ("error free\n");
   return;
-
-}
+}*/
 
 
 noeud creation_arbre (void){

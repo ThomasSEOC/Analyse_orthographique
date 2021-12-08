@@ -52,12 +52,21 @@ int analyse_livre_dicoliste_sans_doublons(char* filename, plistedge liste){
         cpt ++;
       }
       else{
-        if(!est_present_liste(liste, word))
+        if (!est_present_liste(liste, word))
         {
-          insere_tete_abs(word,&mots_abs);
+          insere_tete_abs(word, &mots_abs);
           cpt++;
         }
       }
+
+      /*if(!est_present_liste(liste, word)){
+        cpt++;
+        printf("%d",cpt);
+        if (!presence_abs(word, mots_abs)){
+          insere_tete_abs(word,&mots_abs);
+        }
+      }*/
+
       word = strtok(NULL," ");
     }
   }
@@ -74,7 +83,7 @@ int analyse_livre_dicoliste_avec_doublons(char* filename, plistedge liste){
 
   FILE *p = fopen(filename, "r");
 
-    if (p==NULL) {
+    if (p == NULL) {
       perror("fopen");
       exit(EXIT_FAILURE);
   }
@@ -91,10 +100,10 @@ int analyse_livre_dicoliste_avec_doublons(char* filename, plistedge liste){
     // On traite ici les "séparateurs", la ponctutatuion, les traites d'union, etc... en remplacant tout ce qui n'est pas une lettre
     // minuscule par un espace.
     // Exemple : "Peut-etre." devient "peut etre "
-    for(int i=0 ; i<strlen(file_contents) ; i++)
+    for(int i = 0 ; i < strlen (file_contents) ; i++)
     {
-      file_contents[i]=tolower(file_contents[i]);
-      if(file_contents[i]< 97 || file_contents[i]>122)
+      file_contents[i] = tolower (file_contents[i]);
+      if(file_contents[i] < 97 || file_contents[i] > 122)
       {
         file_contents[i] = ' ';
       }
