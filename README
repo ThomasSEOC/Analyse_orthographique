@@ -1,0 +1,86 @@
+Phelma 2A APMAN DIJS Thomas - FALGAYRAC Loïc 
+============================
+
+- src: contient les fonctions .c en dehors des tests
+
+- bin: contient les fichiers exécutables
+
+- include: contient les fichiers .h
+
+- test: contient les fichiers tests .c
+
+============================
+
+  NOTES :
+Nous avons implémenté une liste, une table de hachage et un arbre préfixe pour stocker le dictionnaire.
+
+============================
+Strcture du projet
+
+  - bin
+  
+  - a_la_recherche_du_temps_perdu.txt
+  - FR.txt
+    
+  - Makefile
+  - README
+  
+  - src : contient les fichiers .c
+  
+    - list.c
+    
+    - implementation_arbre :
+      arbre.c
+      lecture_fichier_arbre.c
+      
+    - implementation_dicoliste :
+      - dicoliste.c
+      - lecture_dicoliste.c
+      
+    - implementation_hashtable:
+      - hashtable.c
+      - lecture_hashtabl.c
+      
+  - include: contient les fichiers .h
+    - arbre.h
+    - dicoliste.h
+    - hashtable.h
+    - lecture_dicoliste.h
+    - lecture_fichier_arbre.h
+    - lecture_hashtable.h
+    - list.h
+      
+  - test : contient les fichiers test
+  
+    - test_arbre_avec_doublons.c
+    - test_arbre_sans_doublons.c
+    - test_dicoliste_avec_doublons.c
+    - test_dicoliste_sans_doublons.c
+    - test_hashtable_sans_doublons.c
+    - test_hashtable_avec_doublons.c
+
+============== EXECUTION ET COMPILATION ==============
+
+Pour compiler et executer les programmes contenus dans ce projet écrire dans un terminal :
+	make all					 | > compile tout
+
+        make test_arbre_sans_doublons                  | > compile l'arbre sans doublons
+        make test_arbre_avec_doublons                  | > compile l'arbre avec doublons
+        make test_dicoliste_sans_doublons              | > compile la liste simple sans doublons
+        make test_dicoliste_avec_doublons              | > compile la liste simple avec doublons
+        make test_hashtable_sans_doublons              | > compile la table de hachage sans doublons
+        make test_hashtable_avec_doublons              | > compile la table de hachage avec doublons
+        
+        make exe_arbre_sans_doublons                   | > execute l'arbre sans doublons
+        make exe_arbre_avec_doublons                   | > execute l'arbre avec doublons
+        make exe_dicoliste_sans_doublons               | > execute la liste simple sans doublons
+        make exe_dicoliste_avec_doublons               | > execute la liste simple avec doublons
+        make exe_hashtable_sans_doublons               | > execute la table de hachage sans doublons
+        make exe_hashtable_avec_doublons               | > execute la table de hachage avec doublons
+
+=======================================
+NOTE pour la table de hachage :
+
+Dans hachage.c, il est possible de modifier la taille de la table de hachage dans #DEFINE au début du programme
+
+=======================================
